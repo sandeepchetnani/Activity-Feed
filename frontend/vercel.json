@@ -1,0 +1,8 @@
+{
+  "rewrites": [
+    {
+      "source": "/api/:path*",
+      "destination": "https://activity-feed-dusky.vercel.app/api/:path*"
+    }
+  ]
+}
