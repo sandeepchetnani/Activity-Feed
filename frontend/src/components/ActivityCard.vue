@@ -2,7 +2,7 @@
   <div class="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-300">
     <div v-if="activity.imageUrl" class="relative">
       <img 
-        :src="activity.imageUrl" 
+        :src="activity.imageUrl || 'https://pub-6a74383dd798433f8364e8d2b7ed45ca.r2.dev/static/outsite-co-R-LK3sqLiBw-unsplash.jpg'"
         :alt="activity.title"
         class="w-full h-48 sm:h-56 object-cover"
         @error="handleImageError"

@@ -1,7 +1,7 @@
 <template>
-  <div class="max-w-2xl mx-auto px-4 py-8">
+  <div class="max-w-7xl mx-auto px-4 py-8">
     <h1 class="text-2xl sm:text-3xl font-bold text-gray-800 mb-8 text-center">
-      Activity Feed
+      InspireFeed
     </h1>
 
     <div v-if="error" class="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded-lg mb-6">
@@ -15,7 +15,7 @@
       </button>
     </div>
 
-    <div class="space-y-6">
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
       <ActivityCard 
         v-for="activity in activities" 
         :key="activity._id" 
@@ -23,7 +23,7 @@
       />
 
       <template v-if="loading">
-        <LoadingSkeleton v-for="n in 3" :key="'skeleton-' + n" />
+        <LoadingSkeleton v-for="n in 4" :key="'skeleton-' + n" />
       </template>
     </div>
 
