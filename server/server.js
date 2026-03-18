@@ -21,10 +21,10 @@ app.use("/api/feed", feedRoutes);
 
 app.get("/", (req, res) => {
   res.json({
-    message: "Activity Feed API",
+    message: "200 ok",
     version: "1.0.0",
     endpoints: {
-      feed: "GET /api/feed?lastId=<cursor>&limit=<number>",
+      feed: "server is up",
     },
   });
 });
