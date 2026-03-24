@@ -7,11 +7,14 @@ const apiClient = axios.create({
   }
 })
 
-export const fetchFeed = async (lastId = null, limit = 10) => {
+export const fetchFeed = async (lastId = null, limit = 10, search = null) => {
   try {
     const params = { limit }
     if (lastId) {
       params.lastId = lastId
+    }
+    if (search) {
+      params.search = search
     }
     const response = await apiClient.get('/feed', { params })
     return response.data.data || []
