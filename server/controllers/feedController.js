@@ -2,8 +2,8 @@ const feedService = require("../services/feedService");
 
 const getFeed = async (req, res) => {
   try {
-    const { lastId, limit } = req.query;
-    const result = await feedService.getFeed(lastId, limit);
+    const { lastId, limit, search } = req.query;
+    const result = await feedService.getFeed(lastId, limit, search);
 
     res.status(200).json({
       success: true,

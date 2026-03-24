@@ -1,10 +1,34 @@
 const mongoose = require("mongoose");
 const Activity = require("../models/Activity");
 
-const getFeed = async (lastId, limit = 10) => {
-  const parsedLimit = Math.min(Math.max(parseInt(limit, 10) || 10, 1), 50);
+const buildFuzzyRegex = (searchTerm) => {
+  const escaped = searchTerm.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+  const fuzzyPattern = escaped.split("").join(".*");
+  return new RegExp(fuzzyPattern, "i");
+};
 
+const getFeed = async (lastId, limit = 10, search = null) => {
   let query = {};
+
+  if (search && search.trim()) {
+    const fuzzyRegex = buildFuzzyRegex(search.trim());
+    query.title = { $regex: fuzzyRegex };
+    
+    const activities = await Activity.find(query)
+      .sort({ _id: -1 })
+      .lean();
+
+    return {
+      data: activities,
+      pagination: {
+        hasMore: false,
+        nextCursor: null,
+        count: activities.length,
+      },
+    };
+  }
+
+  const parsedLimit = Math.min(Math.max(parseInt(limit, 10) || 10, 1), 50);
 
   if (lastId) {
     if (!mongoose.Types.ObjectId.isValid(lastId)) {
